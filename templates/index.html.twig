@@ -13,20 +13,6 @@
         <p>You may <a href="/login">login</a> or <a href="/register">register</a>.</p>
     {% endif %}
 
-    {% for airport in airportList %}
-        <hr>
-        <div>
-            <h3>{{airport.name}}</h3>
-            
-            <p>{{airport.description}}</p>
-            <p>Price  {{airport.price}}</p>
-            <form method="POST" action="/addtrip">
-                Add Trip
-                <input type="hidden" name="airportID" value="{{airport.ID}}">
-                
-                <input type="submit" value="Add trip">
-            </form>
-        </div>
-    {% endfor %}
+   
 
 {% endblock %}

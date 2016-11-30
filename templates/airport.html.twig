@@ -1,0 +1,78 @@
+{% extends "master.html.twig" %}
+
+{% block title %}TripAdvise-Airprts{% endblock %}
+
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+         function showCity() {
+
+            $.ajax({
+                url: "/city",
+               
+
+                statusCode: {
+                    401: function (xhr) {
+                        
+                    }
+                },
+                type: "GET",
+                dataType: "json"
+            }).done(function (data) {
+                
+                var opts = "";
+                for (var i = 0; i < data.length; i++) {
+                    opts += '<option value="' + data[i].city+'-'+data[i].country+ '">' + data[i].city+'-'+data[i].country + '</option>';
+                }
+                $("#city").html(opts);
+                $("#city").val(1);
+                
+            });
+
+        }
+        $(document).ready(function () {
+
+                  showCity();
+            
+        });
+        </script>
+        {% endblock %}
+{% block content %}
+
+    <h1>Welcome to TripAdvisor</h1>
+
+    {% if sessionUser %}
+        <p>Hello {{sessionUser.name}} ({{sessionUser.email}}).
+            You may <a href="/logout">logout</a>.</p>
+        {% else %}
+        <p>You may <a href="/login">login</a> or <a href="/register">register</a>.</p>
+    {% endif %}
+<div>
+    <table>
+        <th><td>Airport</td><td>city</td></th>
+    {% for airport in airportList %}
+        <tr>      
+            
+            <td>{{airport.name}}-{{airport.code}}</td>            
+            <td>{{airport.city}}-{{airport.country}}</td>
+            
+        </tr>
+       
+    {% endfor %}
+      </table>
+    
+     </div>
+       {% if sessionUser %}
+            <form method="POST" action="/addAirport">
+                Add new Air port
+                Airport Name:<input type="text" name="name" >
+                Airport Code:<input type="text" name="code" >
+                City:<select id="city" name="city">                
+                </select>
+                <input type="submit" value="Add airport">
+            </form>
+       {% endif %}
+
+{% endblock %}
+

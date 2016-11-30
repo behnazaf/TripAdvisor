@@ -8,16 +8,16 @@ $log = new Logger('main');
 $log->pushHandler(new StreamHandler('logs/everything.log', Logger::DEBUG));
 $log->pushHandler(new StreamHandler('logs/errors.log', Logger::ERROR));
 
-if ($_SERVER['SERVER_NAME'] == 'localhost') {
+//if ($_SERVER['SERVER_NAME'] == 'localhost') {
     DB::$dbName = 'TripAdvisor';
     DB::$user = 'TripAdvisor';
     DB::$password = 'd75GjHxKdjTxYLeK'; //Home
     DB::$port='3333';
-} else { // hosted on external server
-    DB::$dbName = 'cp4724_TripAdvisor';
-    DB::$user = 'cp4724_TripAdvisor';
-    DB::$password = 'CtIeWH3iU0kx';
-}
+//} else { // hosted on external server
+ //   DB::$dbName = 'cp4724_TripAdvisor';
+ //   DB::$user = 'cp4724_TripAdvisor';
+ //   DB::$password = 'CtIeWH3iU0kx';
+//}
 
 DB::$encoding = 'utf8'; 
 DB::$error_handler = 'sql_error_handler';
@@ -38,7 +38,7 @@ function sql_error_handler($params) {
     $log->error("SQL error: " . $params['error']);
     $log->error(" in query: " . $params['query']);
     http_response_code(500);   
-    $app->render('error_internal.html.twig', array('mainCategoryList' => $mainCategoryList));
+    $app->render('error_internal.html.twig');
     die;
 }
 
