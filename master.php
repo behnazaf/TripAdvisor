@@ -14,8 +14,8 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
     DB::$password = 'd75GjHxKdjTxYLeK'; //Home
     DB::$port='3333';
 } else { // hosted on external server
-    DB::$dbName = 'cp4724_bestbid';
-    DB::$user = 'cp4724_bestbid';
+    DB::$dbName = 'cp4724_TripAdvisor';
+    DB::$user = 'cp4724_TripAdvisor';
     DB::$password = 'CtIeWH3iU0kx';
 }
 
@@ -39,7 +39,7 @@ function sql_error_handler($params) {
     $log->error(" in query: " . $params['query']);
     http_response_code(500);   
     $app->render('error_internal.html.twig', array('mainCategoryList' => $mainCategoryList));
-    die; // don't want to keep going if a query broke
+    die;
 }
 
 

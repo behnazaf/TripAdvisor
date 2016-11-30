@@ -1,6 +1,11 @@
 <?php
+session_start();
 
+// enable on-demand class loader
 require_once 'vendor/autoload.php';
+require_once 'master.php';
+
+
 
 $app = new \Slim\Slim(array(
     'view' => new \Slim\Views\Twig()
@@ -12,8 +17,7 @@ $view->parserOptions = array(
     'cache' => dirname(__FILE__) . '/cache'
 );
 $view->setTemplatesDirectory(dirname(__FILE__) . '/templates');
-//TripAdvisor
-//d75GjHxKdjTxYLeK
+
 
 
 
